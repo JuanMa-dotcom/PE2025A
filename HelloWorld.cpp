@@ -9,7 +9,8 @@ DESCRIPCION: En este programa imprimimos en la terminal "Hola, Mundo"
 
 
 #include <iostream>
+//Inicio de main
 int main(){
     std::cout << "Hola, Mundo" << std::endl;
     return 0;
-}
+} //fin de main
