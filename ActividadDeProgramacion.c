@@ -7,8 +7,9 @@ PROFESOR: Sergio Franco Casillas
 DESCRIPCION: En este programa imprimimos en la terminal datos personales"
 ********************************************************************/
 #include <stdio.h>
+//inicio de main
 int main(){
-
+//mandamos a imprimir los datos requeridos
     printf("Nombre: Juan Manuel Valdez Lopez\n");
     printf("Edad: 20 anios\n");
     printf("Lugar de residencia: Arandas, Jalisco\n");
@@ -16,4 +17,4 @@ int main(){
     printf("Carrera: Ing. en Computacion\n");
     printf("Semestre: Segundo\n");
         return 0;
-}
+} //fin de main
