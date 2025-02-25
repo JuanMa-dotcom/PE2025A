@@ -1,259 +1,143 @@
 /*******PRESENTACION********
 NOMBRE: Juan Manuel Valdez Lopez
-FECHA:25 de Febrero de 2025
-PROGRAMA: Actividad de programacion9.cpp
+FECHA:18 de Febrero de 2025
+PROGRAMA: Actividad de programacion8.cpp
 CENTRO UNIVERSITARIO DE LOS ALTOS / UNIVERSIDAD DE GUADALAJARA
 PROFESOR: Sergio Franco Casillas
-DESCRIPCION: En este programa elaboramos una Matriz
+DESCRIPCION: En este programa elaboramos una suma de un arreglo
 ********************************************************************/
 
-
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-
 using namespace std;
 
-class Matriz {
-private:
-    int **matriz;
-    int n;  // Tamaño de la matriz (nxn)
-
-public:
-    // Constructor
-    Matriz(int tamaño) {  // Cambié 'matriz' por 'Matriz'
-        n = tamaño;
-        matriz = new int*[n];
-        for (int i = 0; i < n; i++) {
-            matriz[i] = new int[n];
-        }
-    }
-
-    // Destructor
-    ~Matriz() {
-        for (int i = 0; i < n; i++) {
-            delete[] matriz[i];
-        }
-        delete[] matriz;
-    }
-
-    // Método para llenar la matriz con valores aleatorios entre -100 y 100
-    void llenarAleatorio() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                matriz[i][j] = rand() % 201 - 100; // Genera un número entre -100 y 100
-            }
-        }
-    }
-
-    // Método para mostrar la matriz
-    void mostrar() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                cout << matriz[i][j] << "\t";
-            }
-            cout << endl;
-        }
-    }
-
-    // Método para ingresar un valor en una posición específica
-    void editarElemento(int fila, int col, int valor) {
-        if (fila >= 0 && fila < n && col >= 0 && col < n) {
-            matriz[fila][col] = valor;
-        } else {
-            cout << "Índice fuera de rango" << endl;
-        }
-    }
-
-    // Método para borrar un elemento (ponerlo a 0)
-    void borrarElemento(int fila, int col) {
-        if (fila >= 0 && fila < n && col >= 0 && col < n) {
-            matriz[fila][col] = 0;
-        } else {
-            cout << "Índice fuera de rango" << endl;
-        }
-    }
-
-    // Método para vaciar la matriz (poner todo a 0)
-    void vaciar() {
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                matriz[i][j] = 0;
-            }
-        }
-    }
-
-    // Método para obtener el tamaño de la matriz
-    int getTamaño() {
-        return n;
-    }
-
-    // Método para sumar dos matrices
-    Matriz sumar(Matriz &otra) {
-        Matriz resultado(n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                resultado.matriz[i][j] = matriz[i][j] + otra.matriz[i][j];
-            }
-        }
-        return resultado;
-    }
-
-    // Método para restar dos matrices
-    Matriz restar(Matriz &otra) {
-        Matriz resultado(n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                resultado.matriz[i][j] = matriz[i][j] - otra.matriz[i][j];
-            }
-        }
-        return resultado;
-    }
-
-    // Método para multiplicar dos matrices
-    Matriz multiplicar(Matriz &otra) {
-        if (n != otra.getTamaño()) {
-            cout << "Error: Las matrices deben tener el mismo tamaño para multiplicarse." << endl;
-            return Matriz(n); // Devuelve una matriz vacía del mismo tamaño
-        }
-
-        Matriz resultado(n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                resultado.matriz[i][j] = 0;
-                for (int k = 0; k < n; k++) {
-                    resultado.matriz[i][j] += matriz[i][k] * otra.matriz[k][j];
-                }
-            }
-        }
-        return resultado;
-    }
-};
-
-// Menú interactivo
-void menu(Matriz &m1, Matriz &m2) {
-    int opcion, fila, col, valor;
-    do {
-        cout << "\n--- Menu ---\n";
-        cout << "1. Llenar matriz 1 con valores aleatorios\n";
-        cout << "2. Llenar matriz 2 con valores aleatorios\n";
-        cout << "3. Mostrar matriz 1\n";
-        cout << "4. Mostrar matriz 2\n";
-        cout << "5. Editar un valor en matriz 1\n";
-        cout << "6. Editar un valor en matriz 2\n";
-        cout << "7. Borrar un valor en matriz 1\n";
-        cout << "8. Borrar un valor en matriz 2\n";
-        cout << "9. Vaciar matriz 1\n";
-        cout << "10. Vaciar matriz 2\n";
-        cout << "11. Sumar matrices\n";
-        cout << "12. Restar matrices\n";
-        cout << "13. Multiplicar matrices\n";
-        cout << "14. Salir\n";
-        cout << "Seleccione una opcion: ";
-        cin >> opcion;
-
-        switch (opcion) {
-            case 1:
-                m1.llenarAleatorio();
-                cout << "Matriz 1 llenada con valores aleatorios entre -100 y 100." << endl;
-                break;
-            case 2:
-                m2.llenarAleatorio();
-                cout << "Matriz 2 llenada con valores aleatorios entre -100 y 100." << endl;
-                break;
-            case 3:
-                cout << "Matriz 1:\n";
-                m1.mostrar();
-                break;
-            case 4:
-                cout << "Matriz 2:\n";
-                m2.mostrar();
-                break;
-            case 5:
-                cout << "Ingrese la fila (0 a " << m1.getTamaño()-1 << "): ";
-                cin >> fila;
-                cout << "Ingrese la columna (0 a " << m1.getTamaño()-1 << "): ";
-                cin >> col;
-                cout << "Ingrese el valor: ";
-                cin >> valor;
-                m1.editarElemento(fila, col, valor);
-                cout << "Valor editado en matriz 1." << endl;
-                break;
-            case 6:
-                cout << "Ingrese la fila (0 a " << m2.getTamaño()-1 << "): ";
-                cin >> fila;
-                cout << "Ingrese la columna (0 a " << m2.getTamaño()-1 << "): ";
-                cin >> col;
-                cout << "Ingrese el valor: ";
-                cin >> valor;
-                m2.editarElemento(fila, col, valor);
-                cout << "Valor editado en matriz 2." << endl;
-                break;
-            case 7:
-                cout << "Ingrese la fila (0 a " << m1.getTamaño()-1 << "): ";
-                cin >> fila;
-                cout << "Ingrese la columna (0 a " << m1.getTamaño()-1 << "): ";
-                cin >> col;
-                m1.borrarElemento(fila, col);
-                cout << "Valor borrado en matriz 1." << endl;
-                break;
-            case 8:
-                cout << "Ingrese la fila (0 a " << m2.getTamaño()-1 << "): ";
-                cin >> fila;
-                cout << "Ingrese la columna (0 a " << m2.getTamaño()-1 << "): ";
-                cin >> col;
-                m2.borrarElemento(fila, col);
-                cout << "Valor borrado en matriz 2." << endl;
-                break;
-            case 9:
-                m1.vaciar();
-                cout << "Matriz 1 vaciada." << endl;
-                break;
-            case 10:
-                m2.vaciar();
-                cout << "Matriz 2 vaciada." << endl;
-                break;
-            case 11: {
-                Matriz resultado = m1.sumar(m2);
-                cout << "Resultado de la suma de matrices:\n";
-                resultado.mostrar();
-                break;
-            }
-            case 12: {
-                Matriz resultado = m1.restar(m2);
-                cout << "Resultado de la resta de matrices:\n";
-                resultado.mostrar();
-                break;
-            }
-            case 13: {
-                Matriz resultado = m1.multiplicar(m2);
-                cout << "Resultado de la multiplicación de matrices:\n";
-                resultado.mostrar();
-                break;
-            }
-            case 14:
-                cout << "Saliendo del programa..." << endl;
-                break;
-            default:
-                cout << "Opción no válida. Intente nuevamente." << endl;
-        }
-    } while (opcion != 14);
+const int MAX_SIZE = 10; // Tamaño máximo del arreglo
+//Mostramos menu al usuario
+void mostrarMenu() {
+    cout << "\n--- Menú Principal ---\n";
+    cout << "1. Agregar un valor\n";
+    cout << "2. Mostrar todos los valores\n";
+    cout << "3. Calcular la sumatoria de los valores\n";
+    cout << "4. Editar un valor existente\n";
+    cout << "5. Borrar un valor existente\n";
+    cout << "6. Vaciar el arreglo\n";
+    cout << "7. Salir\n";
+    cout << "Seleccione una opción (1-7): ";
 }
 
+void agregarValor(int arreglo[], int &tam) {
+    if (tam >= MAX_SIZE) {
+        cout << "\n¡El arreglo está lleno! No puedes agregar más valores.\n";
+        return;
+    }
+    cout << "\nIngresa el valor para la posición " << tam << ": ";
+    cin >> arreglo[tam++];
+    cout << "¡Valor agregado correctamente!\n";
+}
+
+void mostrarValores(const int arreglo[], int tam) {
+    if (tam == 0) {
+        cout << "\nEl arreglo está vacío. No hay valores para mostrar.\n";
+        return;
+    }
+    cout << "\n--- Valores en el arreglo ---\n";
+    for (int i = 0; i < tam; i++) {
+        cout << "Posición " << i << ": " << arreglo[i] << "\n";
+    }
+}
+
+int calcularSumatoria(const int arreglo[], int tam) {
+    int sumatoria = 0;
+    for (int i = 0; i < tam; i++) {
+        sumatoria += arreglo[i];
+    }
+    return sumatoria;
+}
+
+void editarElemento(int arreglo[], int tam) {
+    if (tam == 0) {
+        cout << "\nEl arreglo está vacío. No hay valores para editar.\n";
+        return;
+    }
+    int posicion;
+    cout << "\nIngresa la posición del valor que deseas editar (0-" << tam - 1 << "): ";
+    cin >> posicion;
+    if (posicion < 0 || posicion >= tam) {
+        cout << "¡Posición inválida! Intenta de nuevo.\n";
+        return;
+    }
+    cout << "Valor actual en la posición " << posicion << ": " << arreglo[posicion] << "\n";
+    cout << "Ingresa el nuevo valor: ";
+    cin >> arreglo[posicion];
+    cout << "¡Valor editado correctamente!\n";
+}
+
+void borrarElemento(int arreglo[], int &tam) {
+    if (tam == 0) {
+        cout << "\nEl arreglo está vacío. No hay valores para borrar.\n";
+        return;
+    }
+    int posicion;
+    cout << "\nIngresa la posición del valor que deseas borrar (0-" << tam - 1 << "): ";
+    cin >> posicion;
+    if (posicion < 0 || posicion >= tam) {
+        cout << "¡Posición inválida! Intenta de nuevo.\n";
+        return;
+    }
+    for (int i = posicion; i < tam - 1; i++) {
+        arreglo[i] = arreglo[i + 1];
+    }
+    tam--;
+    cout << "¡Valor borrado correctamente!\n";
+}
+
+void vaciarArreglo(int &tam) {
+    if (tam == 0) {
+        cout << "\nEl arreglo ya está vacío.\n";
+        return;
+    }
+    tam = 0;
+    cout << "\n¡Arreglo vaciado correctamente!\n";
+}
+//Inicio de main
 int main() {
-    srand(time(0));  // Inicializar la semilla para los números aleatorios
+    int arreglo[MAX_SIZE] = {0};
+    int tam = 0;
+    int opcion;
 
-    int tamaño;
+    cout << "¡Bienvenido al programa de manejo de arreglos!\n";
+    cout << "Puedes almacenar hasta " << MAX_SIZE << " valores.\n";
+
     do {
-        cout << "Ingrese el tamaño de la matriz (de 2 a 10): ";
-        cin >> tamaño;
-        if (tamaño < 2 || tamaño > 10) {
-            cout << "Tamaño inválido. Debe ser entre 2 y 10." << endl;
+        mostrarMenu();
+        cin >> opcion;
+//Abrimos un switch para ver los casos posibles
+        switch (opcion) {
+            case 1:
+                agregarValor(arreglo, tam);
+                break;
+            case 2:
+                mostrarValores(arreglo, tam);
+                break;
+            case 3:
+                cout << "\nLa sumatoria de los valores es: " << calcularSumatoria(arreglo, tam) << "\n";
+                break;
+            case 4:
+                editarElemento(arreglo, tam);
+                break;
+            case 5:
+                borrarElemento(arreglo, tam);
+                break;
+            case 6:
+                vaciarArreglo(tam);
+                break;
+            case 7:
+                cout << "\n¡Gracias por usar el programa! Hasta luego.\n";
+                break;
+            default:
+                cout << "\n¡Opción inválida! Por favor, selecciona una opción del 1 al 7.\n";
         }
-    } while (tamaño < 2 || tamaño > 10);
-
-    Matriz m1(tamaño), m2(tamaño);
-    menu(m1, m2);
+    } while (opcion != 7);
 
     return 0;
 }
+//fin de main
