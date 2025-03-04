@@ -15,11 +15,11 @@ DESCRIPCION: En este programa elaboramos un programa con vectores o con arreglos
 
 using namespace std;
 
-// FunciÛn para mostrar el conjunto
+// Funci√≥n para mostrar el conjunto
 template<typename T>
 void mostrarConjunto(const vector<T>& conjunto) {
     if (conjunto.empty()) {
-        cout << "El conjunto est· vacÌo." << endl;
+        cout << "El conjunto est√° vac√≠o." << endl;
     } else {
         for (const auto& elem : conjunto) {
             cout << elem << " ";
@@ -28,7 +28,7 @@ void mostrarConjunto(const vector<T>& conjunto) {
     }
 }
 
-// FunciÛn para insertar elementos en el conjunto
+// Funci√≥n para insertar elementos en el conjunto
 template<typename T>
 void insertarElemento(vector<T>& conjunto) {
     T elemento;
@@ -38,7 +38,7 @@ void insertarElemento(vector<T>& conjunto) {
     cout << "Elemento insertado exitosamente." << endl;
 }
 
-// FunciÛn para borrar un elemento del conjunto
+// Funci√≥n para borrar un elemento del conjunto
 template<typename T>
 void borrarElemento(vector<T>& conjunto) {
     T elemento;
@@ -53,7 +53,7 @@ void borrarElemento(vector<T>& conjunto) {
     }
 }
 
-// FunciÛn para editar un elemento en el conjunto
+// Funci√≥n para editar un elemento en el conjunto
 template<typename T>
 void editarElemento(vector<T>& conjunto) {
     T viejo, nuevo;
@@ -70,26 +70,26 @@ void editarElemento(vector<T>& conjunto) {
     }
 }
 
-// FunciÛn para vaciar el conjunto
+// Funci√≥n para vaciar el conjunto
 template<typename T>
 void vaciarConjunto(vector<T>& conjunto) {
     conjunto.clear();
     cout << "Conjunto vaciado exitosamente." << endl;
 }
 
-// FunciÛn para realizar la uniÛn de dos conjuntos
+// Funci√≥n para realizar la uni√≥n de dos conjuntos
 template<typename T>
 vector<T> unionConjuntos(const vector<T>& A, const vector<T>& B) {
     vector<T> resultado = A; // Inicializa resultado con los elementos de A
     for (const auto& elem : B) { // Recorre cada elemento de B
-        if (find(resultado.begin(), resultado.end(), elem) == resultado.end()) { // Si no est· en resultado
+        if (find(resultado.begin(), resultado.end(), elem) == resultado.end()) { // Si no est√° en resultado
             resultado.push_back(elem); // Agrega el elemento de B
         }
     }
-    return resultado; // Devuelve el conjunto resultado (uniÛn de A y B)
+    return resultado; // Devuelve el conjunto resultado (uni√≥n de A y B)
 }
 
-// FunciÛn para realizar la intersecciÛn de dos conjuntos
+// Funci√≥n para realizar la intersecci√≥n de dos conjuntos
 template<typename T>
 vector<T> interseccionConjuntos(const vector<T>& A, const vector<T>& B) {
     vector<T> resultado;
@@ -101,7 +101,7 @@ vector<T> interseccionConjuntos(const vector<T>& A, const vector<T>& B) {
     return resultado;
 }
 
-// FunciÛn para realizar la diferencia de dos conjuntos
+// Funci√≥n para realizar la diferencia de dos conjuntos
 template<typename T>
 vector<T> diferenciaConjuntos(const vector<T>& A, const vector<T>& B) {
     vector<T> resultado;
@@ -113,7 +113,7 @@ vector<T> diferenciaConjuntos(const vector<T>& A, const vector<T>& B) {
     return resultado;
 }
 
-// FunciÛn para realizar el complemento de un conjunto con respecto a un universo
+// Funci√≥n para realizar el complemento de un conjunto con respecto a un universo
 template<typename T>
 vector<T> complementoConjunto(const vector<T>& universo, const vector<T>& A) {
     vector<T> resultado;
@@ -124,7 +124,7 @@ vector<T> complementoConjunto(const vector<T>& universo, const vector<T>& A) {
     }
     return resultado;
 }
-
+//Inicio de main 
 int main() {
     vector<int> conjunto1;
     vector<int> conjunto2;
@@ -144,13 +144,13 @@ int main() {
         cout << "8. Vaciar conjunto 2\n";
         cout << "9. Ver conjunto 1\n";
         cout << "10. Ver conjunto 2\n";
-        cout << "11. UniÛn de conjuntos\n";
-        cout << "12. IntersecciÛn de conjuntos\n";
+        cout << "11. Uni√≥n de conjuntos\n";
+        cout << "12. Intersecci√≥n de conjuntos\n";
         cout << "13. Diferencia de conjuntos\n";
         cout << "14. Complemento de conjunto 1 respecto al universo\n";
         cout << "15. Complemento de conjunto 2 respecto al universo\n";
         cout << "16. Salir\n";
-        cout << "Seleccione una opciÛn: ";
+        cout << "Seleccione una opci√≥n: ";
         cin >> opcion;
 
         switch (opcion) {
@@ -188,13 +188,13 @@ int main() {
                 break;
             case 11: {
                 vector<int> resultado = unionConjuntos(conjunto1, conjunto2);
-                cout << "UniÛn: ";
+                cout << "Uni√≥n: ";
                 mostrarConjunto(resultado);
                 break;
             }
             case 12: {
                 vector<int> resultado = interseccionConjuntos(conjunto1, conjunto2);
-                cout << "IntersecciÛn: ";
+                cout << "Intersecci√≥n: ";
                 mostrarConjunto(resultado);
                 break;
             }
@@ -221,10 +221,10 @@ int main() {
                 cout << "Saliendo del programa...\n";
                 break;
             default:
-                cout << "OpciÛn no v·lida. Intente de nuevo.\n";
+                cout << "Opci√≥n no v√°lida. Intente de nuevo.\n";
         }
     }
 
     return 0;
 }
-
+//fin de main 
